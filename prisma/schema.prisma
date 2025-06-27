@@ -1,0 +1,19 @@
+// Prisma Schema 檔案
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  phone     String
+  role      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
