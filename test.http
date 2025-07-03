@@ -86,3 +86,17 @@ Content-Type: application/json
   "role": "user",
   "isActive": false
 }
+
+### createHouse()
+POST {{host}}/add-house
+Content-Type: application/json
+
+{
+  "address": "鄉下",
+  "userId": 1
+}
+
+### findUserHouses()
+GET {{host}}/user-houses/1
+Accept: application/json
+

@@ -8,11 +8,13 @@ const prisma = new PrismaClient()
 app.use(cors())
 app.use(express.json())
 
+// 查詢所有使用者
 app.get('/get-users', async (req, res) => {
   const users = await prisma.user.findMany({ orderBy: { id: 'asc' } })
   res.json(users)
 })
 
+// 新增使用者
 app.post('/add-user', async (req, res) => {
   try {
     const user = await prisma.user.create({
@@ -24,6 +26,7 @@ app.post('/add-user', async (req, res) => {
   }
 })
 
+// 修改使用者
 app.put('/update-users/:id', async (req, res) => {
   const id = Number(req.params.id)
   const data = req.body
@@ -39,6 +42,7 @@ app.put('/update-users/:id', async (req, res) => {
   }
 })
 
+// 刪除使用者
 app.delete('/delete-user/:id', async (req, res) => {
   const id = Number(req.params.id)
 
@@ -52,6 +56,7 @@ app.delete('/delete-user/:id', async (req, res) => {
   }
 })
 
+// 根據 email 查詢使用者
 app.post('/findUnique-user', async (req, res) => {
   const { email } = req.body
 
@@ -65,6 +70,7 @@ app.post('/findUnique-user', async (req, res) => {
   }
 })
 
+// 查詢第一筆符合 role 的使用者
 app.post('/find-first-user', async (req, res) => {
   const { role } = req.body
 
@@ -79,6 +85,7 @@ app.post('/find-first-user', async (req, res) => {
   }
 })
 
+// 批量新增使用者
 app.post('/create-users', async (req, res) => {
   const { users } = req.body
 
@@ -92,6 +99,7 @@ app.post('/create-users', async (req, res) => {
   }
 })
 
+// 批量更新：將 role 為指定值的使用者，更新 isActive 狀態
 app.post('/update-users', async (req, res) => {
   const { role, isActive } = req.body
 
@@ -105,6 +113,43 @@ app.post('/update-users', async (req, res) => {
     res.status(400).json({ error: '批量更新失敗', detail: err })
   }
 })
+
+// 新增房子
+app.post('/add-house', async (req, res) => {
+  const { address, userId } = req.body
+  try {
+    const house = await prisma.house.create({
+      data: {
+        address,
+        user: {
+          connect: { id: userId }
+        }
+      }
+    })
+    res.json(house)
+  } catch (err) {
+    res.status(400).json({ error: '新增房子失敗', detail: err })
+  }
+})
+
+// 依 user id 找所有房子
+app.get('/user-houses/:id', async (req, res) => {
+  const userId = Number(req.params.id)
+
+  try {
+    // 查 user 並包含所有 houses
+    const userWithHouses = await prisma.user.findUnique({
+      where: { id: userId },
+      include: { houses: true },
+    })
+
+    // 回傳該使用者的 houses 陣列
+    res.json(userWithHouses.houses)
+  } catch (err) {
+    res.status(500).json({ error: '查詢失敗', detail: err })
+  }
+})
+
 
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000')
