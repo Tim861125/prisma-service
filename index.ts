@@ -114,6 +114,43 @@ app.post('/update-users', async (req, res) => {
   }
 })
 
+// 新增房子
+app.post('/add-house', async (req, res) => {
+  const { address, userId } = req.body
+  try {
+    const house = await prisma.house.create({
+      data: {
+        address,
+        user: {
+          connect: { id: userId }
+        }
+      }
+    })
+    res.json(house)
+  } catch (err) {
+    res.status(400).json({ error: '新增房子失敗', detail: err })
+  }
+})
+
+// 依 user id 找所有房子
+app.get('/user-houses/:id', async (req, res) => {
+  const userId = Number(req.params.id)
+
+  try {
+    // 查 user 並包含所有 houses
+    const userWithHouses = await prisma.user.findUnique({
+      where: { id: userId },
+      include: { houses: true },
+    })
+
+    // 回傳該使用者的 houses 陣列
+    res.json(userWithHouses.houses)
+  } catch (err) {
+    res.status(500).json({ error: '查詢失敗', detail: err })
+  }
+})
+
+
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000')
 })
