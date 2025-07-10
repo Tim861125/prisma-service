@@ -73,6 +73,27 @@ Content-Type: application/json
       "phone": "0922333444",
       "role": "admin",
       "isActive": false
+    },
+    {
+      "name": "Charlie",
+      "email": "charlie@example.com",
+      "phone": "0933444555",
+      "role": "user",
+      "isActive": true
+    },
+    {
+      "name": "David",
+      "email": "david@example.com",
+      "phone": "0944555666",
+      "role": "manager",
+      "isActive": true
+    },
+    {
+      "name": "Eve",
+      "email": "eve@example.com",
+      "phone": "0955666777",
+      "role": "user",
+      "isActive": false
     }
   ]
 }
@@ -92,11 +113,40 @@ POST {{host}}/add-house
 Content-Type: application/json
 
 {
-  "address": "鄉下",
-  "userId": 1
+  "address": "中和",
+  "userId": 11
 }
 
-### findUserHouses()
+### include()
 GET {{host}}/user-houses/1
 Accept: application/json
+
+### groupBy()
+GET {{host}}/group-by-role
+Accept: application/json
+
+### distinct()
+GET {{host}}/distinct-roles
+Accept: application/json
+
+### createManyHouses()
+POST {{host}}/create-houses
+Content-Type: application/json
+
+{
+  "houses": [
+    {
+      "address": "台北市",
+      "userId": 11
+    },
+    {
+      "address": "台中市",
+      "userId": 10
+    },
+    {
+      "address": "高雄市",
+      "userId": 2
+    }
+  ]
+}
 
