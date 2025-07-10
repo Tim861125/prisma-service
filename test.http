@@ -1,0 +1,102 @@
+﻿##
+@host = http://localhost:3000
+
+###  findMany()
+GET {{host}}/get-users
+Accept: application/json
+
+
+###  create()
+POST {{host}}/add-user
+Content-Type: application/json
+
+{
+  "name": "albert",
+  "email": "albert@example.com",
+  "phone": "124124",
+  "role": "admin",
+  "isActive": true
+}
+
+
+###  update()
+PUT {{host}}/update-users/2
+Content-Type: application/json
+
+{
+  "name": "派小星",
+  "email": "allen@example.com",
+  "isActive": true,
+  "role": "user",
+  "phone": "0987654321"
+}
+
+
+###  delete()
+DELETE {{host}}/delete-user/5
+
+
+###  findUnique()
+POST {{host}}/findUnique-user
+Content-Type: application/json
+
+{
+  "email": "tim@example.com"
+}
+
+
+###  findFirst()
+POST {{host}}/find-first-user
+Content-Type: application/json
+
+{
+  "role": "user"
+}
+
+
+###  createMany()
+POST {{host}}/create-users
+Content-Type: application/json
+
+{
+  "users": [
+    {
+      "name": "Alice",
+      "email": "alice@example.com",
+      "phone": "0911222333",
+      "role": "user",
+      "isActive": true
+    },
+    {
+      "name": "Bob",
+      "email": "bob@example.com",
+      "phone": "0922333444",
+      "role": "admin",
+      "isActive": false
+    }
+  ]
+}
+
+
+###  updateMany()
+POST {{host}}/update-users
+Content-Type: application/json
+
+{
+  "role": "user",
+  "isActive": false
+}
+
+### createHouse()
+POST {{host}}/add-house
+Content-Type: application/json
+
+{
+  "address": "鄉下",
+  "userId": 1
+}
+
+### findUserHouses()
+GET {{host}}/user-houses/1
+Accept: application/json
+

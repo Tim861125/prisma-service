@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "House" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "address" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    CONSTRAINT "House_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
