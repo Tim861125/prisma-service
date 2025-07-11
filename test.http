@@ -11,29 +11,31 @@ POST {{host}}/add-user
 Content-Type: application/json
 
 {
-  "name": "albert",
-  "email": "albert@example.com",
-  "phone": "124124",
-  "role": "admin",
+  "name": "chris",
+  "age": 18,
+  "email": "chris@example.com",
+  "phone": "0989109912",
+  "role": "user",
   "isActive": true
 }
 
 
 ###  update()
-PUT {{host}}/update-users/2
+PUT {{host}}/update-users/16
 Content-Type: application/json
 
 {
-  "name": "派小星",
-  "email": "allen@example.com",
-  "isActive": true,
+  "name": "chris",
+  "age": 19,
+  "email": "chris@example.com",
+  "phone": "0989109912",
   "role": "user",
-  "phone": "0987654321"
+  "isActive": false,
 }
 
 
 ###  delete()
-DELETE {{host}}/delete-user/5
+DELETE {{host}}/delete-user/
 
 
 ###  findUnique()
