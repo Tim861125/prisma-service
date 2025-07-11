@@ -22,7 +22,7 @@ app.post('/add-user', async (req, res) => {
     })
     res.json(user)
   } catch (err) {
-    res.status(400).json({ error: '新增失敗', detail: err })
+    res.status(400).json({ error: 'add fail', detail: err })
   }
 })
 
@@ -38,7 +38,7 @@ app.put('/update-users/:id', async (req, res) => {
     })
     res.json(updatedUser)
   } catch (err) {
-    res.status(400).json({ error: '修改失敗', detail: err })
+    res.status(400).json({ error: 'update fail', detail: err })
   }
 })
 
@@ -50,9 +50,9 @@ app.delete('/delete-user/:id', async (req, res) => {
     await prisma.user.delete({
       where: { id },
     })
-    res.json({ message: `使用者 ${id} 刪除成功` })
+    res.json({ message: `User id: ${id} delete success` })
   } catch (err) {
-    res.status(400).json({ error: '刪除失敗', detail: err })
+    res.status(400).json({ error: 'delete fail', detail: err })
   }
 })
 
@@ -66,7 +66,7 @@ app.post('/findUnique-user', async (req, res) => {
     })
     res.json(user)
   } catch (err) {
-    res.status(400).json({ error: '查詢失敗', detail: err })
+    res.status(400).json({ error: 'findUnique fail', detail: err })
   }
 })
 
@@ -81,7 +81,7 @@ app.post('/find-first-user', async (req, res) => {
     })
     res.json(user)
   } catch (err) {
-    res.status(400).json({ error: '查詢失敗', detail: err })
+    res.status(400).json({ error: 'findFirst fail', detail: err })
   }
 })
 
@@ -95,7 +95,7 @@ app.post('/create-users', async (req, res) => {
     })
     res.json({ count: createdUsers.count })
   } catch (err) {
-    res.status(400).json({ error: '批量新增失敗', detail: err })
+    res.status(400).json({ error: 'createMany fail', detail: err })
   }
 })
 
@@ -110,7 +110,7 @@ app.post('/update-users', async (req, res) => {
     })
     res.json({ count: updated.count })
   } catch (err) {
-    res.status(400).json({ error: '批量更新失敗', detail: err })
+    res.status(400).json({ error: 'updateMany fail', detail: err })
   }
 })
 
@@ -127,7 +127,7 @@ app.post('/add-house', async (req, res) => {
     })
     res.json(house)
   } catch (err) {
-    res.status(400).json({ error: '新增房子失敗', detail: err })
+    res.status(400).json({ error: 'create fail', detail: err })
   }
 })
 
@@ -142,7 +142,7 @@ app.get('/user-houses/:id', async (req, res) => {
 
     res.json(userWithHouses?.houses)
   } catch (err) {
-    res.status(500).json({ error: '查詢失敗', detail: err })
+    res.status(500).json({ error: 'findUnique fail', detail: err })
   }
 })
 
@@ -155,7 +155,7 @@ app.post('/create-houses', async (req, res) => {
     })
     res.json({ count: createdHouses.count })
   } catch (err) {
-    res.status(400).json({ error: '批量新增失敗', detail: err })
+    res.status(400).json({ error: 'createMany fail', detail: err })
   }
 })
 
@@ -179,7 +179,7 @@ app.get('/group-by-role', async (req, res) => {
     })
     res.json(groupByRole)
   } catch (err) {
-    res.status(500).json({ error: '分組查詢失敗', detail: err })
+    res.status(500).json({ error: 'groupBy fail', detail: err })
   }
 })
 
@@ -193,7 +193,7 @@ app.get('/distinct-roles', async (req, res) => {
     })
     res.json(distinctRoles.map(item => item.role))
   } catch (err) {
-    res.status(500).json({ error: 'Distinct 查詢失敗', detail: err })
+    res.status(500).json({ error: 'Distinct fail', detail: err })
   }
 })
 
@@ -221,7 +221,7 @@ app.post('/create-user-and-house', async (req, res) => {
 
     res.json(result)
   } catch (err) {
-    res.status(400).json({ error: '新增失敗', detail: err })
+    res.status(400).json({ error: 'transaction fail', detail: err })
   }
 })
 
@@ -237,7 +237,7 @@ app.post('/upsert-user', async (req, res) => {
     })
     res.json(user)
   } catch (err) {
-    res.status(400).json({ error: 'Upsert 失敗', detail: err })
+    res.status(400).json({ error: 'Upsert fail', detail: err })
   }
 })
 
