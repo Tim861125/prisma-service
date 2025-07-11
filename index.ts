@@ -225,6 +225,22 @@ app.post('/create-user-and-house', async (req, res) => {
   }
 })
 
+// Upsert
+app.post('/upsert-user', async (req, res) => {
+  const { email, name, phone, role, isActive } = req.body
+
+  try {
+    const user = await prisma.user.upsert({
+      where: { email },
+      update: { name, phone, role, isActive },
+      create: { email, name, phone, role, isActive },
+    })
+    res.json(user)
+  } catch (err) {
+    res.status(400).json({ error: 'Upsert 失敗', detail: err })
+  }
+})
+
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000')
 })

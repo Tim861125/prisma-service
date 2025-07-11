@@ -163,7 +163,19 @@ Content-Type: application/json
     "isActive": true
   },
   "houseData": {
-    "address": 1
+    "address": "Transaction House"
   }
+}
+
+### Upsert()
+POST {{host}}/upsert-user
+Content-Type: application/json
+
+{
+  "email": "upsert@example.com",
+  "name": "Upsert User old old",
+  "phone": "0987654321",
+  "role": "admin",
+  "isActive": true
 }
 
