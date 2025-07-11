@@ -14,6 +14,7 @@ model User {
   phone     String
   role      String
   isActive  Boolean  @default(true)
+  age       Int? 
   createdAt DateTime @default(now())
   houses    House[]
 }

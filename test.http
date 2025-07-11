@@ -167,6 +167,34 @@ Content-Type: application/json
   }
 }
 
+### Add age to users
+PUT {{host}}/update-users/9
+Content-Type: application/json
+
+{
+  "age": 25
+}
+
+###
+PUT {{host}}/update-users/12
+Content-Type: application/json
+
+{
+  "age": 44
+}
+
+###
+PUT {{host}}/update-users/13
+Content-Type: application/json
+
+{
+  "age": 35
+}
+
+### Aggregate()
+GET {{host}}/aggregate-users
+Accept: application/json
+
 ### Upsert()
 POST {{host}}/upsert-user
 Content-Type: application/json

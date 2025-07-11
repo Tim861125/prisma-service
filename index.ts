@@ -241,6 +241,32 @@ app.post('/upsert-user', async (req, res) => {
   }
 })
 
+// Aggregate
+app.get('/aggregate-users', async (req, res) => {
+  try {
+    const summary = await prisma.user.aggregate({
+      _count: {
+        id: true,
+      },
+      _avg: {
+        age: true,
+      },
+      _sum: {
+        age: true,
+      },
+      _min: {
+        age: true,
+      },
+      _max: {
+        age: true,
+      },
+    })
+    res.json(summary)
+  } catch (err) {
+    res.status(500).json({ error: 'aggregate fail', detail: err })
+  }
+})
+
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000')
 })
