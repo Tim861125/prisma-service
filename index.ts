@@ -27,7 +27,7 @@ app.post('/add-user', async (req, res) => {
 })
 
 // update
-app.put('/update-users/:id', async (req, res) => {
+app.post('/update-users/:id', async (req, res) => {
   const id = Number(req.params.id)
   const data = req.body
 

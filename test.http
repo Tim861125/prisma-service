@@ -21,7 +21,7 @@ Content-Type: application/json
 
 
 ###  update()
-PUT {{host}}/update-users/16
+POST {{host}}/update-users/1
 Content-Type: application/json
 
 {
@@ -30,12 +30,12 @@ Content-Type: application/json
   "email": "chris@example.com",
   "phone": "0989109912",
   "role": "user",
-  "isActive": false,
+  "isActive": false
 }
 
 
 ###  delete()
-DELETE {{host}}/delete-user/
+DELETE {{host}}/delete-user/17
 
 
 ###  findUnique()
@@ -52,7 +52,7 @@ POST {{host}}/find-first-user
 Content-Type: application/json
 
 {
-  "role": "user"
+  "role": "admin"
 }
 
 
@@ -110,7 +110,7 @@ Content-Type: application/json
   "isActive": false
 }
 
-### createHouse()
+###
 POST {{host}}/add-house
 Content-Type: application/json
 
@@ -131,7 +131,7 @@ Accept: application/json
 GET {{host}}/distinct-roles
 Accept: application/json
 
-### createManyHouses()
+###
 POST {{host}}/create-houses
 Content-Type: application/json
 
@@ -169,7 +169,7 @@ Content-Type: application/json
   }
 }
 
-### Add age to users
+###
 PUT {{host}}/update-users/9
 Content-Type: application/json
 
@@ -202,8 +202,8 @@ POST {{host}}/upsert-user
 Content-Type: application/json
 
 {
-  "email": "upsert@example.com",
-  "name": "Upsert User old old",
+  "email": "upsert_new@example.com",
+  "name": "Upsert User",
   "phone": "0987654321",
   "role": "admin",
   "isActive": true
