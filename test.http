@@ -150,3 +150,20 @@ Content-Type: application/json
   ]
 }
 
+### Transaction()
+POST {{host}}/create-user-and-house
+Content-Type: application/json
+
+{
+  "userData": {
+    "name": "TransactionUser-Allen",
+    "email": "transaction-Allen@example.com",
+    "phone": "0912123536",
+    "role": "user",
+    "isActive": true
+  },
+  "houseData": {
+    "address": 1
+  }
+}
+

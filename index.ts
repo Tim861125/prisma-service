@@ -197,6 +197,34 @@ app.get('/distinct-roles', async (req, res) => {
   }
 })
 
+// Transaction
+app.post('/create-user-and-house', async (req, res) => {
+  const { userData, houseData } = req.body
+
+  try {
+    const result = await prisma.$transaction(async (prisma) => {
+      const newUser = await prisma.user.create({
+        data: userData,
+      })
+
+      const newHouse = await prisma.house.create({
+        data: {
+          address: houseData.address,
+          user: {
+            connect: { id: newUser.id },
+          },
+        },
+      })
+
+      return { newUser, newHouse }
+    })
+
+    res.json(result)
+  } catch (err) {
+    res.status(400).json({ error: '新增失敗', detail: err })
+  }
+})
+
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000')
 })
