@@ -7,16 +7,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+  MANAGER
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   name      String
   email     String   @unique
   phone     String
-  role      String
+  role      Role     @default(USER)
   isActive  Boolean  @default(true)
-  age       Int? 
+  age       Int?
   createdAt DateTime @default(now())
   houses    House[]
+
+  @@index([role])
+  @@index([createdAt])
 }
 
 model House {

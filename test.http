@@ -1,10 +1,8 @@
-﻿##
-@host = http://localhost:3000
+﻿@host = http://localhost:3000
 
 ###  findMany()
 GET {{host}}/get-users
 Accept: application/json
-
 
 ###  create()
 POST {{host}}/add-user
@@ -15,10 +13,9 @@ Content-Type: application/json
   "age": 18,
   "email": "chris@example.com",
   "phone": "0989109912",
-  "role": "user",
+  "role": "USER",
   "isActive": true
 }
-
 
 ###  update()
 POST {{host}}/update-users/1
@@ -29,14 +26,12 @@ Content-Type: application/json
   "age": 19,
   "email": "chris@example.com",
   "phone": "0989109912",
-  "role": "user",
+  "role": "USER",
   "isActive": false
 }
 
-
 ###  delete()
 DELETE {{host}}/delete-user/17
-
 
 ###  findUnique()
 POST {{host}}/findUnique-user
@@ -46,15 +41,13 @@ Content-Type: application/json
   "email": "tim@example.com"
 }
 
-
 ###  findFirst()
 POST {{host}}/find-first-user
 Content-Type: application/json
 
 {
-  "role": "admin"
+  "role": "ADMIN"
 }
-
 
 ###  createMany()
 POST {{host}}/create-users
@@ -66,47 +59,46 @@ Content-Type: application/json
       "name": "Alice",
       "email": "alice@example.com",
       "phone": "0911222333",
-      "role": "user",
+      "role": "USER",
       "isActive": true
     },
     {
       "name": "Bob",
       "email": "bob@example.com",
       "phone": "0922333444",
-      "role": "admin",
+      "role": "ADMIN",
       "isActive": false
     },
     {
       "name": "Charlie",
       "email": "charlie@example.com",
       "phone": "0933444555",
-      "role": "user",
+      "role": "USER",
       "isActive": true
     },
     {
       "name": "David",
       "email": "david@example.com",
       "phone": "0944555666",
-      "role": "manager",
+      "role": "MANAGER",
       "isActive": true
     },
     {
       "name": "Eve",
       "email": "eve@example.com",
       "phone": "0955666777",
-      "role": "user",
+      "role": "USER",
       "isActive": false
     }
   ]
 }
-
 
 ###  updateMany()
 POST {{host}}/update-users
 Content-Type: application/json
 
 {
-  "role": "user",
+  "role": "USER",
   "isActive": false
 }
 
@@ -161,7 +153,7 @@ Content-Type: application/json
     "name": "TransactionUser-Allen",
     "email": "transaction-Allen@example.com",
     "phone": "0912123536",
-    "role": "user",
+    "role": "USER",
     "isActive": true
   },
   "houseData": {
@@ -205,7 +197,50 @@ Content-Type: application/json
   "email": "upsert_new@example.com",
   "name": "Upsert User",
   "phone": "0987654321",
-  "role": "admin",
+  "role": "ADMIN",
   "isActive": true
 }
+
+### -------------------- NEW APIS --------------------
+
+### Pagination (Get page 2, 3 users per page)
+GET {{host}}/users-paginated?page=2&pageSize=3
+Accept: application/json
+
+### Advanced Filtering (email contains '.com' and age > 20)
+GET {{host}}/users-filtered?emailContains=.com&ageGt=20
+Accept: application/json
+
+### Relational Filters (users with a house in '台北市')
+GET {{host}}/users-with-house-in?address=台北市
+Accept: application/json
+
+### Nested Writes (create a user and their houses)
+POST {{host}}/create-user-with-houses
+Content-Type: application/json
+
+{
+  "userData": {
+    "name": "Nested User",
+    "email": "nested@example.com",
+    "phone": "0912345678",
+    "role": "USER"
+  },
+  "housesData": [
+    { "address": "他的第一棟房子" },
+    { "address": "他的第二棟房子" }
+  ]
+}
+
+### Atomic Number Operations (increment age for user with id 1)
+POST {{host}}/increment-user-age/1
+Accept: application/json
+
+### Prisma Client Extension (get user with fullName)
+GET {{host}}/user-fullname/1
+Accept: application/json
+
+### Raw SQL Query (get users with age > 30)
+GET {{host}}/users-raw-sql?ageGt=30
+Accept: application/json
 
